@@ -1,0 +1,140 @@
+# ===========================================
+# PROMPT 1 — FULL STACK PROJECT CREATION
+# ===========================================
+I need a complete, runnable internship demo project: a minimal but professional **E-commerce MVP** with React (Vite) frontend and Express backend. Produce full files, folder structure, and exact run instructions. Aim for clarity and a small codebase so I can finish and demo within 30–60 minutes. Requirements:
+
+## Tech stack
+- Frontend: Vite + React (functional components)
+- Backend: Node + Express
+- Auth: JWT (jsonwebtoken) + bcryptjs (password hashing)
+- Database: none (in-memory arrays)
+- CORS enabled between backend (port 4000/5000) and frontend (Vite default port)
+- Demo user auto-created: `demo@demo.com` / `demo123`
+
+## Core features
+1. Register/Login (JWT auth)
+2. Product list (fetch from backend)
+3. Cart (add/remove/update)
+4. Checkout (protected route)
+5. Minimal clean styling
+
+## File structure
+backend/
+- package.json
+- server.js
+
+frontend/
+- package.json
+- index.html
+- src/
+  - main.jsx
+  - App.jsx
+  - Login.jsx
+  - ProductCard.jsx
+  - Cart.jsx
+  - styles.css
+README.md
+
+## Behavior
+- Store JWT + user in localStorage
+- Show “Login”, “Logout”, and Cart count in header
+- Handle API via fetch()
+- If token missing → redirect to login
+- Checkout = POST /api/checkout with Authorization header
+- Backend returns `{ success, order }`
+
+## Output format
+Return all project files as code blocks labeled with file paths.
+
+---
+
+# ===========================================
+# PROMPT 2 — ADD AUTH (REGISTER/LOGIN + JWT)
+# ===========================================
+Enhance the existing backend with JWT authentication.
+
+Tasks:
+1. Add `/api/register` and `/api/login` endpoints.
+2. Use bcryptjs for hashing passwords and jsonwebtoken for JWT creation.
+3. Create `authMiddleware` to protect `/api/checkout`.
+4. Create demo user automatically on startup: `demo@demo.com` / `demo123`.
+5. On successful login/register → return `{ token, user }`.
+6. In frontend, create `Login.jsx` page with toggle (login/register).
+7. Persist token + user in localStorage.
+8. Include token in Authorization header for checkout.
+9. Update README with demo credentials.
+
+Files to modify:
+- backend/server.js
+- frontend/src/Login.jsx
+- frontend/src/App.jsx
+- frontend/src/context/AuthContext.jsx (for token persistence)
+
+---
+
+# ===========================================
+# PROMPT 3 — UI ENHANCEMENTS + TOAST + FILTERS
+# ===========================================
+Improve the frontend UX and design. Add toast popup, quantity selection, search, and filters.
+
+## Goals
+1. Improve overall UI (modern, responsive, dark/light friendly).
+2. Add toast popup when adding to cart.
+3. Add quantity selector in product cards.
+4. Add search and category filters (Phones, Laptops, Keyboards, Accessories, Wearables, etc.).
+5. Add CSS animations (hover, button press, toast fade).
+6. Keep everything client-side (no backend changes needed).
+
+## Implementation
+- Create `src/components/Toast.jsx` and `src/components/ToastContainer.jsx`.
+- Modify `src/components/ProductCard.jsx` → include quantity input & Add button.
+- Modify `src/pages/Products.jsx` → include search input, category dropdown, debounce (300ms).
+- Modify `src/context/CartContext.jsx` → support `addToCart(product, qty)` and toast callback.
+- Update `src/styles.css` → grid layout, animations, toasts, filter bar.
+- Mount `<ToastContainer />` in `App.jsx`.
+
+## Toast behavior
+- Shows message like: `"Added 3 × Wireless Headphones to cart"`
+- Auto-dismiss after 2.5s
+- Top-right stacking, fade/slide animation
+
+## Search/filter behavior
+- Case-insensitive search on title & description
+- Category dropdown + “Clear” button
+- Products auto-filter before rendering
+
+Return modified/created files:
+- Toast.jsx
+- ToastContainer.jsx
+- ProductCard.jsx
+- Products.jsx
+- CartContext.jsx
+- Header.jsx
+- styles.css
+- README.md (mention new features)
+
+---
+
+# ===========================================
+# PROMPT 4 — EXPAND PRODUCT LIST WITH REALISTIC IMAGES
+# ===========================================
+I want to improve my e-commerce assignment project by expanding the product catalog and ensuring every product has realistic, category-matching images.
+
+### Tasks
+1. Edit `backend/src/data/products.js`.
+2. Add 20 products (each with `id`, `title`, `description`, `price`, `category`, and `image`).
+3. Use real images from Unsplash or Pexels matching the category:
+   - Phones → smartphones
+   - Laptops → sleek modern laptops
+   - Accessories → chargers, hubs, cases
+   - Keyboards → mechanical or RGB keyboards
+   - Monitors → desktop screens
+   - Tablets → people using tablets
+   - Wearables → smart watches or bands
+   - Home → smart home gadgets
+4. Each product should have a meaningful name and unique ID.
+5. Realistic pricing (20–1500 USD).
+
+### Example product format
+```js
+{ id: 'p1', title: 'Wireless Headphones', description: 'Noise-cancelling over-ear wireless headphones with 30h battery.', price: 79.99, category: 'Accessories', image: 'https://images.unsplash.com/photo-1518444026917-0ed8c05f06b8?w=800&h=500&auto=format&fit=crop' }
